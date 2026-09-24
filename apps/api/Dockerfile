@@ -1,5 +1,8 @@
 FROM node:20-slim
 
+# Prisma's engine needs OpenSSL to talk to PostgreSQL.
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
 RUN npm install -g pnpm@12.6.0
 
 WORKDIR /app
