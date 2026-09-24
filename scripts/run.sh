@@ -54,7 +54,9 @@ API_PID=$!
 
 echo "==> Starting web on :$PORT"
 cd /app
-pnpm --filter web start &
+# Bind to all interfaces so Fly's proxy can reach the app (next start can
+# otherwise bind to 127.0.0.1).
+HOSTNAME=0.0.0.0 PORT="${PORT:-8080}" pnpm --filter web start &
 WEB_PID=$!
 
 wait "$API_PID" "$WEB_PID"
