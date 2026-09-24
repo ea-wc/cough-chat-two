@@ -1,0 +1,62 @@
+schema: spec-driven
+
+context: |
+  Language: en
+  All artifacts must be written in en.
+  Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+
+  # Project: Telehealth MVP ("10x Onboarding" challenge)
+  A functional prototype of a telehealth web application with a public product
+  landing page, plus role-based Patient, Doctor, and Admin interfaces. Visitors
+  understand the service; patients register, find a doctor, book a consultation,
+  and connect online; doctors manage availability, consultations, notes, and
+  prescriptions; admins oversee accounts, doctor profiles, appointments, and audit.
+
+  # Tech stack (non-negotiable per requirements)
+  - Frontend: React with Vite (Next.js also allowed) — TypeScript
+  - Backend: NestJS — TypeScript
+  - API: REST + JSON over HTTP/HTTPS
+  - Database: PostgreSQL via Prisma ORM
+  - Package manager: pnpm
+  - Local deployment: Docker Compose (frontend, NestJS backend, PostgreSQL)
+
+  # Standalone-runtime constraint (hard requirement)
+  Every core feature must be implemented in the application itself. NO SaaS, BaaS,
+  or external runtime APIs for authentication, matching, notifications, messaging,
+  file storage, scheduling, conferencing, analytics, or medical records. Use only
+  open-source packages. No external CMS, form service, image host, or marketing SaaS.
+  No external AI service — doctor matching uses deterministic rules in NestJS.
+
+  # Roles
+  - Patient: books/attends consultations, views appointment history and medical records.
+  - Doctor: manages professional profile, availability, consultations, prescriptions, notes.
+  - Admin: pre-provisioned account only (no public registration); manages users,
+    doctor profiles, appointments, operational dashboard, audit log.
+
+  # Prioritization
+  Complete the core patient journey first (register -> profile -> discover ->
+  book -> consult -> view records). A smaller, polished, coherent solution is
+  preferred over ambitious but unfinished. No audio/video streaming required;
+  the consultation workspace tracks states only (scheduled, joined, in-progress, completed).
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing
