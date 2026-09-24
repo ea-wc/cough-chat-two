@@ -126,9 +126,28 @@ REST endpoints under `/api`, authenticated with a Bearer JWT:
 | `pnpm --filter api db:push`   | Apply the Prisma schema |
 | `pnpm --filter api db:seed`   | Seed the database       |
 | `pnpm --filter api test`      | Run API unit tests      |
+| `pnpm docs:generate`          | Regenerate derived docs pages from OpenSpec specs + Prisma |
+| `pnpm docs:dev`               | Preview the documentation site locally          |
+| `pnpm docs:build`             | Build the documentation site (VitePress)        |
+
+## Documentation
+
+Technical documentation is a VitePress site under `docs/` (published to GitHub Pages via
+`.github/workflows/deploy-docs.yml`):
+
+- **Technical Overview** — context and features (features page generated from `openspec/specs/`).
+- **High-level Architecture** — C4 context/container/component/deployment diagrams (Mermaid).
+- **Detailed Architecture** — one page per NestJS module, generated from the capability specs.
+- **Data model** — an entity-relationship diagram generated from the Prisma schema.
+- **API Documentation** — Swagger/OpenAPI (`/api/docs` when the API is running).
+
+Derived pages are produced by `scripts/generate-docs.mjs`; authored pages (C4 diagrams, context,
+home) are maintained by hand. OpenSpec's `spec-driven-docs` schema adds a `docs` artifact to each
+change, making documentation a first-class, tracked deliverable.
 
 ## Spec-driven development
 
 This project uses [OpenSpec](https://github.com/Fission-AI/OpenSpec). The `telehealth-mvp`
-change under `openspec/changes/` contains the proposal, capability specs, design, and tasks.
-Use `/opsx:propose`, `/opsx:apply`, and `/opsx:archive` to drive further work.
+change under `openspec/changes/archive/` contains the proposal, capability specs, design, and tasks.
+Use `/opsx:propose`, `/opsx:apply`, and `/opsx:archive` to drive further work. The project uses a
+forked `spec-driven-docs` schema that adds a `docs` artifact to every change.

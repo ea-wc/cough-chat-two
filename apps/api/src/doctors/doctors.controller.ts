@@ -9,6 +9,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 import { CurrentUser, Roles } from '../auth/auth.decorators.js';
 import { JwtAuthGuard, type AuthUser } from '../auth/jwt-auth.guard.js';
@@ -22,6 +23,8 @@ import { MatchingService } from './matching.service.js';
 @Controller('doctors/me')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(Role.DOCTOR)
+@ApiTags('doctors')
+@ApiBearerAuth()
 export class DoctorsController {
   constructor(private readonly doctorsService: DoctorsService) {}
 
@@ -59,6 +62,8 @@ export class DoctorsController {
 @Controller('doctors')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(Role.PATIENT)
+@ApiTags('doctors')
+@ApiBearerAuth()
 export class DoctorDiscoveryController {
   constructor(private readonly doctorsService: DoctorsService, private readonly matching: MatchingService) {}
 

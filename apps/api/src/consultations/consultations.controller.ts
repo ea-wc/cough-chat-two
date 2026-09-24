@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 import { CurrentUser, Roles } from '../auth/auth.decorators.js';
 import { JwtAuthGuard, type AuthUser } from '../auth/jwt-auth.guard.js';
@@ -8,6 +9,8 @@ import { NotesDto, PrescriptionDto, UpdateStateDto } from './dto/consultation.dt
 
 @Controller('consultations')
 @UseGuards(JwtAuthGuard, RolesGuard)
+@ApiTags('consultations')
+@ApiBearerAuth()
 export class ConsultationsController {
   constructor(private readonly consultationsService: ConsultationsService) {}
 

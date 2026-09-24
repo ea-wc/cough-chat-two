@@ -8,6 +8,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 import { CurrentUser, Roles } from '../auth/auth.decorators.js';
 import { JwtAuthGuard, type AuthUser } from '../auth/jwt-auth.guard.js';
@@ -18,6 +19,8 @@ import { ReviewDoctorDto, UpdateUserStatusDto } from './dto/admin.dto.js';
 @Controller('admin')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(Role.ADMIN)
+@ApiTags('admin')
+@ApiBearerAuth()
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 

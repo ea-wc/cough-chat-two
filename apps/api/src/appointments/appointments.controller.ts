@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 import { CurrentUser, Roles } from '../auth/auth.decorators.js';
 import { JwtAuthGuard, type AuthUser } from '../auth/jwt-auth.guard.js';
@@ -9,6 +10,8 @@ import { RescheduleAppointmentDto } from './dto/reschedule-appointment.dto.js';
 
 @Controller('appointments')
 @UseGuards(JwtAuthGuard, RolesGuard)
+@ApiTags('appointments')
+@ApiBearerAuth()
 export class AppointmentsController {
   constructor(private readonly appointmentsService: AppointmentsService) {}
 

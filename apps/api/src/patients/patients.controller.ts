@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 import { CurrentUser, Roles } from '../auth/auth.decorators.js';
 import { JwtAuthGuard, type AuthUser } from '../auth/jwt-auth.guard.js';
@@ -9,6 +10,8 @@ import { PatientsService } from './patients.service.js';
 @Controller('patients')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(Role.PATIENT)
+@ApiTags('patients')
+@ApiBearerAuth()
 export class PatientsController {
   constructor(private readonly patientsService: PatientsService) {}
 
