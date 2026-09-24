@@ -57,6 +57,10 @@ export default withMermaid(
           text: 'API Documentation',
           items: [{ text: 'REST API (Swagger)', link: '/api/' }],
         },
+        {
+          text: 'Testing',
+          items: [{ text: 'End-to-end tests', link: '/testing' }],
+        },
       ],
       socialLinks: [{ icon: 'github', link: 'https://github.com/' }],
       outline: { level: [2, 3] },

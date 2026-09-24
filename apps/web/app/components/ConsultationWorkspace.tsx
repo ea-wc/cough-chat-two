@@ -70,7 +70,6 @@ export default function ConsultationWorkspace({ id }: { id: string }) {
     setError('');
     try {
       await api(`/consultations/${id}/notes`, { method: 'POST', body: { notes, summary } });
-      setMedication('');
       load();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save notes');
@@ -157,12 +156,12 @@ export default function ConsultationWorkspace({ id }: { id: string }) {
           {isDoctor ? (
             <form onSubmit={saveNotes}>
               <div className="field">
-                <label>Consultation notes</label>
-                <textarea rows={4} value={notes} onChange={(e) => setNotes(e.target.value)} />
+                <label htmlFor="notes">Consultation notes</label>
+                <textarea id="notes" rows={4} value={notes} onChange={(e) => setNotes(e.target.value)} />
               </div>
               <div className="field">
-                <label>Summary</label>
-                <input value={summary} onChange={(e) => setSummary(e.target.value)} />
+                <label htmlFor="summary">Summary</label>
+                <input id="summary" value={summary} onChange={(e) => setSummary(e.target.value)} />
               </div>
               <button className="btn btn-primary" type="submit">
                 Save notes
@@ -204,16 +203,16 @@ export default function ConsultationWorkspace({ id }: { id: string }) {
         {isDoctor && (
           <form className="row" onSubmit={addPrescription} style={{ marginTop: 16, alignItems: 'flex-end' }}>
             <div className="field" style={{ margin: 0, flex: 1 }}>
-              <label>Medication</label>
-              <input value={medication} onChange={(e) => setMedication(e.target.value)} required />
+              <label htmlFor="medication">Medication</label>
+              <input id="medication" value={medication} onChange={(e) => setMedication(e.target.value)} required />
             </div>
             <div className="field" style={{ margin: 0, flex: 1 }}>
-              <label>Dosage</label>
-              <input value={dosage} onChange={(e) => setDosage(e.target.value)} required />
+              <label htmlFor="dosage">Dosage</label>
+              <input id="dosage" value={dosage} onChange={(e) => setDosage(e.target.value)} required />
             </div>
             <div className="field" style={{ margin: 0, flex: 1 }}>
-              <label>Instructions</label>
-              <input value={instructions} onChange={(e) => setInstructions(e.target.value)} />
+              <label htmlFor="instructions">Instructions</label>
+              <input id="instructions" value={instructions} onChange={(e) => setInstructions(e.target.value)} />
             </div>
             <button className="btn btn-secondary" type="submit">
               Add

@@ -89,37 +89,38 @@ export default function PatientDashboard() {
             {saved && <div className="success-banner">Profile saved.</div>}
             <div className="grid grid-2" style={{ gap: 12 }}>
               <div className="field">
-                <label>First name</label>
-                <input value={form.firstName} onChange={(e) => update('firstName', e.target.value)} />
+                <label htmlFor="firstName">First name</label>
+                <input id="firstName" value={form.firstName} onChange={(e) => update('firstName', e.target.value)} />
               </div>
               <div className="field">
-                <label>Last name</label>
-                <input value={form.lastName} onChange={(e) => update('lastName', e.target.value)} />
+                <label htmlFor="lastName">Last name</label>
+                <input id="lastName" value={form.lastName} onChange={(e) => update('lastName', e.target.value)} />
               </div>
               <div className="field">
-                <label>Birthday</label>
-                <input type="date" value={form.birthday} onChange={(e) => update('birthday', e.target.value)} />
+                <label htmlFor="birthday">Birthday</label>
+                <input id="birthday" type="date" value={form.birthday} onChange={(e) => update('birthday', e.target.value)} />
               </div>
               <div className="field">
-                <label>Phone</label>
-                <input value={form.phone} onChange={(e) => update('phone', e.target.value)} />
+                <label htmlFor="phone">Phone</label>
+                <input id="phone" value={form.phone} onChange={(e) => update('phone', e.target.value)} />
               </div>
               <div className="field">
-                <label>Weight (kg)</label>
-                <input type="number" value={form.weightKg} onChange={(e) => update('weightKg', e.target.value)} />
+                <label htmlFor="weightKg">Weight (kg)</label>
+                <input id="weightKg" type="number" value={form.weightKg} onChange={(e) => update('weightKg', e.target.value)} />
               </div>
               <div className="field">
-                <label>Height (cm)</label>
-                <input type="number" value={form.heightCm} onChange={(e) => update('heightCm', e.target.value)} />
+                <label htmlFor="heightCm">Height (cm)</label>
+                <input id="heightCm" type="number" value={form.heightCm} onChange={(e) => update('heightCm', e.target.value)} />
               </div>
             </div>
             <div className="field">
-              <label>Address</label>
-              <input value={form.address} onChange={(e) => update('address', e.target.value)} />
+              <label htmlFor="address">Address</label>
+              <input id="address" value={form.address} onChange={(e) => update('address', e.target.value)} />
             </div>
             <div className="field">
-              <label>Medical history</label>
+              <label htmlFor="medicalHistory">Medical history</label>
               <textarea
+                id="medicalHistory"
                 rows={3}
                 value={form.medicalHistory}
                 onChange={(e) => update('medicalHistory', e.target.value)}

@@ -12,6 +12,10 @@ build/
 # Test coverage
 coverage/
 
+# Playwright output
+test-results/
+playwright-report/
+
 # Logs
 *.log
 npm-debug.log*

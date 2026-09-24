@@ -258,6 +258,31 @@ artifacts:
     requires:
       - design
 
+  - id: tests
+    generates: tests/**/*.spec.ts
+    description: Playwright end-to-end tests verifying the spec scenarios
+    template: tests.spec.ts
+    instruction: |
+      Generate Playwright end-to-end tests that verify the scenarios in the specs.
+
+      Each `#### Scenario:` in the capability specs SHALL map to a Playwright test that drives the
+      application and asserts the expected outcome. Write one `<capability>.spec.ts` file per
+      journey under `tests/`, following the project's `playwright.config.ts` (baseURL, chromium).
+
+      Guidelines:
+      - Import `test, expect` from `@playwright/test`.
+      - Name each test after its scenario; implement the WHEN via UI actions (`page.goto`, `fill`,
+        `click`) and the THEN via `expect` assertions.
+      - Use the seeded test accounts documented in design.md for sign-in; register a unique
+        (timestamped) email when a scenario requires a fresh account.
+      - Use the `request` fixture (APIRequestContext) for setup steps that are more reliable or
+        faster than driving the UI (e.g. creating availability or a booking), and drive the UI for
+        the journey under test.
+      - Keep tests deterministic and independent; do not depend on test execution order.
+    requires:
+      - specs
+      - design
+
 apply:
   requires: [ tasks ]
   tracks: tasks.md

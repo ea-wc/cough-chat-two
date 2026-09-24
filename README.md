@@ -129,6 +129,30 @@ REST endpoints under `/api`, authenticated with a Bearer JWT:
 | `pnpm docs:generate`          | Regenerate derived docs pages from OpenSpec specs + Prisma |
 | `pnpm docs:dev`               | Preview the documentation site locally          |
 | `pnpm docs:build`             | Build the documentation site (VitePress)        |
+| `pnpm e2e`                    | Run the Playwright end-to-end suite            |
+| `pnpm e2e:install`            | Install the Playwright chromium browser        |
+| `pnpm e2e:report`             | Open the last Playwright HTML report           |
+
+## End-to-end tests
+
+Browser-level regression tests live in `apps/e2e` (Playwright) and cover the core patient, doctor,
+and admin journeys. They drive the real UI against the running stack. Run them with:
+
+```bash
+pnpm e2e:install          # once, to download chromium
+# with the stack up (docker compose up --build, or pnpm dev):
+pnpm e2e
+```
+
+For an isolated throwaway database (so tests never touch your dev data), run the stack with the E2E
+override:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.e2e.yml up --build
+```
+
+CI runs the suite on push/PR via `.github/workflows/e2e.yml` against a fresh `telehealth_e2e`
+database.
 
 ## Documentation
 

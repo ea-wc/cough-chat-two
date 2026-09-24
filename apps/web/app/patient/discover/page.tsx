@@ -43,7 +43,11 @@ export default function DiscoverPage() {
         body: { availabilityId: slotId, symptoms: symptoms || undefined },
       });
       setMessage('Appointment booked!');
-      if (selected) await openDoctor(selected.id);
+      // Refresh availability without clearing the success message.
+      if (selected) {
+        const refreshed = await api<DoctorProfile>(`/doctors/${selected.id}`);
+        setSelected(refreshed);
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Booking failed');
     } finally {
