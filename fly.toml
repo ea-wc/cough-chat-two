@@ -1,0 +1,19 @@
+# Fly.io single-container deployment (web + api + postgres).
+# Secrets (e.g. JWT_SECRET) are set with `fly secrets set`, not committed here.
+
+app = "cough-chat-two"
+primary_region = "sin"
+
+[build]
+  dockerfile = "Dockerfile.fly"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[mounts]]
+  source = "data"
+  destination = "/data"

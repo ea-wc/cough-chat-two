@@ -92,6 +92,35 @@ On startup the API applies the schema (`prisma db push`) and seeds the database.
    pnpm dev:web      # Next.js on :3000
    ```
 
+## Fly.io deployment (single container)
+
+The whole stack — Next.js web, NestJS API, and PostgreSQL — deploys as one self-contained container
+to Fly.io (`Dockerfile.fly` + `scripts/run.sh` + `fly.toml`). The image is built on GitHub Actions
+(clean network) and pushed to Fly's registry via `.github/workflows/deploy-fly.yml` on every push to
+`main`.
+
+One-time setup:
+
+```bash
+fly apps create cough-chat-two --org <org>      # create the app
+fly volumes create data --size 1                # persistent DB volume
+fly secrets set JWT_SECRET="$(openssl rand -hex 32)"
+flyctl auth token > /tmp/fly-token              # then add as the GitHub secret FLY_API_TOKEN
+```
+
+After that, pushing to `main` deploys automatically. To deploy manually instead:
+
+```bash
+fly deploy
+```
+
+The app is served over HTTPS at `https://<app>.fly.dev`; the web proxies `/api/*` to the internal
+API (a Next.js rewrite), and Postgres persists on the `data` volume. Smoke-test a deployment with:
+
+```bash
+BASE_URL=https://<app>.fly.dev pnpm --filter e2e test deployment-smoke
+```
+
 ## Seeded accounts
 
 | Role    | Email                  | Password     |

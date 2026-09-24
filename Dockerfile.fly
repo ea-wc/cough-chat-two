@@ -1,0 +1,41 @@
+# Single self-contained image: PostgreSQL + NestJS API + Next.js web,
+# supervised by scripts/run.sh. Built from the repository root:
+#   fly deploy --dockerfile Dockerfile.fly
+
+FROM node:20-slim
+
+# PostgreSQL (for the in-container DB) and OpenSSL (Prisma engine dependency).
+RUN apt-get update -y \
+  && apt-get install -y --no-install-recommends openssl postgresql postgresql-contrib \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN npm install -g pnpm@12.6.0
+
+WORKDIR /app
+
+COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
+COPY apps/api/package.json apps/api/package.json
+COPY apps/api/prisma apps/api/prisma
+COPY apps/web/package.json apps/web/package.json
+COPY apps/e2e/package.json apps/e2e/package.json
+
+# Install workspace dependencies.
+RUN pnpm install --frozen-lockfile
+
+# Build the API and the web app.
+COPY apps/api apps/api
+COPY apps/web apps/web
+RUN pnpm --filter api exec prisma generate
+RUN pnpm --filter api build
+
+# The browser reaches the API through the same origin (Next.js rewrite), so the
+# API base URL is relative in this image.
+ARG NEXT_PUBLIC_API_URL=/api
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+RUN pnpm --filter web build
+
+COPY scripts/run.sh /app/run.sh
+RUN chmod +x /app/run.sh
+
+EXPOSE 8080
+ENTRYPOINT ["/app/run.sh"]
