@@ -17,8 +17,8 @@
 
 ## 4. Deploy and verify
 
-- [ ] 4.1 Deploy with `fly deploy` and verify the app is reachable over HTTPS
-- [ ] 4.2 Smoke-test the public URL (landing page loads and a login request succeeds through the proxy) and verify it against the running deployment
+- [x] 4.1 Deploy with `fly deploy` and verify the app is reachable over HTTPS
+- [x] 4.2 Smoke-test the public URL (landing page loads and a login request succeeds through the proxy) and verify it against the running deployment
 
 ## 5. Documentation
 
