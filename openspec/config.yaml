@@ -13,7 +13,7 @@ context: |
   prescriptions; admins oversee accounts, doctor profiles, appointments, and audit.
 
   # Tech stack (non-negotiable per requirements)
-  - Frontend: React with Vite (Next.js also allowed) — TypeScript
+  - Frontend: Next.js (App Router) — TypeScript
   - Backend: NestJS — TypeScript
   - API: REST + JSON over HTTP/HTTPS
   - Database: PostgreSQL via Prisma ORM

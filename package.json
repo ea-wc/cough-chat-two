@@ -1,14 +1,19 @@
 {
   "name": "cough-chat-two",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "private": true,
+  "description": "Telehealth MVP - a functional prototype with a public product landing page plus Patient, Doctor, and Admin interfaces.",
+  "packageManager": "pnpm@12.6.0",
+  "engines": {
+    "node": ">=20.19.0"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "dev": "pnpm --parallel --filter web --filter api dev",
+    "dev:web": "pnpm --filter web dev",
+    "dev:api": "pnpm --filter api dev",
+    "build": "pnpm --filter api build && pnpm --filter web build",
+    "lint": "pnpm --filter web lint && pnpm --filter api lint"
+  },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
@@ -16,8 +21,6 @@
       "onFail": "download"
     }
   },
-  "packageManager": "pnpm@12.6.0",
-  "type": "module",
   "devDependencies": {
     "@fission-ai/openspec": "^1.13.1"
   }

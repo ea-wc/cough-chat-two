@@ -1,3 +1,30 @@
+# Dependencies
 node_modules/
-.DS_Store
+
+# Build outputs
+dist/
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# Test coverage
+coverage/
+
+# Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Env — .env is intentionally tracked for local dev (see README); .env.example is the template.
+# Keep local overrides out:
+.env.local
+.env.*.local
+
+# Prisma generated client is installed into node_modules, nothing extra here.

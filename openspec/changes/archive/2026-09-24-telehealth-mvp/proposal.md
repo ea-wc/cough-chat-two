@@ -16,7 +16,7 @@ There is no application today. We need a functional prototype of a telehealth we
 - Introduce medical records: appointment history, consultation notes, and prescriptions with role-based access.
 - Introduce database-backed in-app notifications (no email/SMS/push).
 - Introduce an admin module: user management, doctor-profile review, appointment oversight, an operational dashboard, and an audit log.
-- Establish the standalone runtime: React + Vite frontend, NestJS backend, Prisma + PostgreSQL, all served via Docker Compose, with no SaaS/BaaS/external runtime dependencies.
+- Establish the standalone runtime: Next.js frontend, NestJS backend, Prisma + PostgreSQL, all served via Docker Compose, with no SaaS/BaaS/external runtime dependencies.
 
 ## Capabilities
 
@@ -37,7 +37,7 @@ There is no application today. We need a functional prototype of a telehealth we
 
 ## Impact
 
-- **New monorepo structure**: `apps/web` (React + Vite), `apps/api` (NestJS), shared Prisma schema, Docker Compose at root.
+- **New monorepo structure**: `apps/web` (Next.js), `apps/api` (NestJS), shared Prisma schema, Docker Compose at root.
 - **Database**: new PostgreSQL schema via Prisma (users, profiles, doctors, availability, appointments, consultations, prescriptions, notifications, audit).
 - **API**: new REST + JSON surface under `/api` with role guards.
 - **Auth**: local email/password with hashed credentials and JWT or session tokens (no external provider).

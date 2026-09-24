@@ -2,7 +2,7 @@
 
 ## Context
 
-Greenfield project. Tech stack is fixed by the requirements: React + Vite frontend, NestJS backend, Prisma + PostgreSQL, TypeScript throughout, pnpm, Docker Compose for local deployment. The hard constraint is a standalone runtime — no SaaS, BaaS, or external runtime APIs for any core feature. See proposal.md for motivation.
+Greenfield project. Tech stack is fixed by the requirements: Next.js frontend, NestJS backend, Prisma + PostgreSQL, TypeScript throughout, pnpm, Docker Compose for local deployment. The hard constraint is a standalone runtime — no SaaS, BaaS, or external runtime APIs for any core feature. See proposal.md for motivation.
 
 ## Goals / Non-Goals
 
@@ -21,11 +21,11 @@ Greenfield project. Tech stack is fixed by the requirements: React + Vite fronte
 ## Decisions
 
 ### Monorepo layout with pnpm workspaces
-**Decision:** `apps/web` (Vite + React + TypeScript) and `apps/api` (NestJS + TypeScript), with a shared Prisma schema under `packages/db` (or `apps/api/prisma`) and a root `pnpm-workspace.yaml`.
+**Decision:** `apps/web` (Next.js App Router + TypeScript) and `apps/api` (NestJS + TypeScript), with a shared Prisma schema under `packages/db` (or `apps/api/prisma`) and a root `pnpm-workspace.yaml`.
 
 **Rationale:** Keeps frontend and backend independently runnable while sharing types and a single schema. pnpm is mandated by the requirements and handles the workspace natively.
 
-**Alternatives:** Next.js (allowed) was considered for SSR of the landing page, but Vite keeps the frontend simpler and the landing page is static enough to not need SSR. Next.js could be swapped later without changing specs.
+**Alternatives:** React + Vite was considered and would be simpler for the static landing page, but Next.js was chosen for SSR/SSG of the public site, file-based routing, and flexibility for server-side concerns (e.g. the prototype disclaimer). Either satisfies the specs.
 
 ### Authentication: local email/password with hashed credentials + JWT
 **Decision:** Store email + bcrypt-hashed password in PostgreSQL; issue a signed JWT (or opaque session) on sign-in; NestJS guards enforce role-based access. Admin is seeded via a Prisma migration/seed script (no public registration).
